@@ -69,10 +69,6 @@ export class LstPokemonSearchComponent implements OnInit {
                         this.evolutions.push({ name: pokevol})
                     }
                 }
-                //ssfor(let i=0;i<datevol.envol.length;i++){
-                    
-                //}
-
 
             }else{
                 console.log('error')
