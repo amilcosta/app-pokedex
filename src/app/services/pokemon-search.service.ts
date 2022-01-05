@@ -23,7 +23,11 @@ export class PokemonSearchService {
         };  
     }
 
-    getBPokemon(idname: string):Observable<any> {
+    getPokemon(idname: string):Observable<any> {
         return this.http.get(this.urlPokedex+`pokemon/${idname}`,this.httpOptions)
+    }
+
+    getAbility(id: string): Observable<any>{
+        return this.http.get(this.urlPokedex+`pokemon/ability/${id}`,this.httpOptions)
     }
 }

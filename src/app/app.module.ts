@@ -11,10 +11,12 @@ import { TestcomponentComponent } from './componentes/testcomponent/testcomponen
 import { BarraComponent } from './componentes/barra/barra.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
 import { LstPokemonSearchComponent } from './componentes/lst-pokemon-search/lst-pokemon-search.component';
+import { LstAbilitySearchComponent } from './componentes/lst-ability-search/lst-ability-search.component';
 
 const routes: Routes = [
   { path: 'principal', component: PrincipalComponent},
   { path: 'lstPokemonSearch', component: LstPokemonSearchComponent},
+  { path: 'lstAbilitySearch', component: LstAbilitySearchComponent},
   { path: '', component: PrincipalComponent},
   { path: '**', component: PrincipalComponent}
 ]
@@ -25,7 +27,8 @@ const routes: Routes = [
     TestcomponentComponent,
     BarraComponent,
     PrincipalComponent,
-    LstPokemonSearchComponent
+    LstPokemonSearchComponent,
+    LstAbilitySearchComponent
   ],
   imports: [
     BrowserModule,

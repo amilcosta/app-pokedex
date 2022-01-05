@@ -1,7 +1,4 @@
 
-
-
-
 <div class="container-fluid">
 
     <div class="card">
@@ -10,11 +7,11 @@
             <button class="btn btn-ucc-volver" (click)="Volver()"><span class="separador"><i class="fas fa-undo"></i></span> Volver</button>
         </div>
         <div class="card-body border">
-            <form [formGroup]="Form" class="" (ngSubmit)="cargarPokemonFiltro(Form.value)">
+            <form [formGroup]="Form" class="" (ngSubmit)="cargarAbilityFiltro(Form.value)">
             <div class="area-big">
                 <div class="box-all">
-                    <label  class="label-ucc" for="filterPoke">&nbsp;&nbsp;Nombre Pokemon o ID Pokemon</label>
-                    <input class="input-ucc" formControlName="filterPoke" type="text" name="filterPoke" id="filterPoke">                        
+                    <label  class="label-ucc" for="filterAbility">&nbsp;&nbsp;Identificador de Habilidad de Pokemon</label>
+                    <input class="input-ucc" formControlName="filterAbility" type="text" name="filterAbility" id="filterAbility">                        
                     
                 </div>
                 <div class="box-all">
@@ -31,12 +28,12 @@
     </div>
 </div>
 
-<div *ngIf="checkPokemon" id="collapseThree" class="collapse container-fluid" aria-labelledby="headingThree" data-parent="#accordion" style="display: block; margin-top: 1em; margin-bottom: 1em;">
+<div *ngIf="checkAbility" id="collapseThree" class="collapse container-fluid" aria-labelledby="headingThree" data-parent="#accordion" style="display: block; margin-top: 1em; margin-bottom: 1em;">
     <div id="accordion">
         <div class="card cada-dtp">
             
             <div class="card-header">
-                <span class="separador"><i class="fas fa-users incon-size"></i></span> Pokemon
+                <span class="separador"><i class="fas fa-users incon-size"></i></span> Habilidad
                 <div class="filtro-ucc">
                     
                         <div class="contador-ucc separador">
@@ -48,39 +45,30 @@
 
             <div class="card-body">
                 <div style="border-radius: 2px; border-color: blue; margin: 0 0; color: #505050;  width:'50%'; float: left;">
-                    <div *ngFor="let item of listadoPokemons" style="width: 100%;  font-size: 14px; font-weight: 500;">
-                        <div style="width: 100%;"><img style="cursor: pointer;" (click)="PokeDetail()" src="{{item.foto}}"/></div>
-                        <div style="width: 100%; ">
-                            <span style="width: 50%;">
-                                Nombre: {{item.name}}
-                            </span>
-                        </div>
-                        <div style="width: 100%;  font-size: 14px; font-weight: 500;">
-                            <span style="width: 50%; ">
-                                Tipo: <span *ngFor="let tipo of typesPoke">{{tipo.type.name}}</span>
-                            </span>
-                        </div>
-                        <div style="width: 100%; ">
-                            <span style="width: 50%;">
-                                Peso: {{item.peso}}
-                            </span>
-                        </div>
+                    <div *ngFor="let item of abilityPokemons" style="width: 100%;">
+                        <!--div style="width: 100%;"><img style="cursor: pointer;" (click)="PokeDetail()" src="{{item.foto}}"/></div-->
                         <div style="width: 100%;">
-                            <span style="width: 50%;   ">
-                                Habilidades: 
+                            <span style="width: 50%; font-size: 14px; font-weight: 500;">
+                                Habilidad: {{item.name}}
+                            </span>
+                            
+                        </div>
+                        
+                        <div style="width: 100%;">
+                            <span style="width: 50%;  font-size: 14px; font-weight: 500;">
+                                Pokemons con la habilidad: 
                             </span>
                             <ul class="list-group">
-                                <li *ngFor="let habilidad of abilities" class="list-group-item" style="width: 50%; color: #505050">{{habilidad.ability.name}}</li>
+                                <li *ngFor="let poke of pokemons" class="list-group-item" style="width: 50%; color: #505050">{{poke.pokemon.name}}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="aditionalInfo" style="border-radius: 2px; border-color: blue; margin: 0 0; color: #505050;  width:'50%'; float: right;">
+                <!--div *ngIf="aditionalInfo" style="border-radius: 2px; border-color: blue; margin: 0 0; color: #505050;  width:'50%'; float: right;">
                     <div *ngFor="let adicion of listadoPokemons" style="width: 100%;" >
                         <div style="width: 100%;">
                             <span style="width: 50%; font-size: 14px; font-weight: 500;">
-                                Evoluciones: 
-                                <span *ngFor="let evol of evolutions" >{{evol.name}}</span> 
+                                Evolucion: {{adicion.evoluciones.name}}
                             </span>
                         </div>
                         <div style="width: 100%;">
@@ -98,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
             </div>
 
         </div>

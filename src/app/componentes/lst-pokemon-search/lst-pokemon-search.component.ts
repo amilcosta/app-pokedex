@@ -21,6 +21,7 @@ export class LstPokemonSearchComponent implements OnInit {
     public abilities: Array<any>= [];
     public stats: Array<any>= [];
     public mensajeError: string = '';
+    public evolutions: Array<any>=[];
     Form: FormGroup;
 
     constructor(private router: Router,private formBuilder: FormBuilder,private _PokemonsService: PokemonSearchService) {
@@ -39,12 +40,17 @@ export class LstPokemonSearchComponent implements OnInit {
         });
     }
     cargarPokemonFiltro(event: any){ 
+        this.listadoPokemons = [];
+        this.abilities = [];
+        this.stats = [];
+        this.evolutions = [];
+        this.aditionalInfo = false;
         this.pokemonFiltro =this.Form.controls['filterPoke'].value;
         this.cargarPokemon()
     }
 
     cargarPokemon(){
-        this._PokemonsService.getBPokemon(this.pokemonFiltro).subscribe(data=>{
+        this._PokemonsService.getPokemon(this.pokemonFiltro).subscribe(data=>{
             //console.log(data);
             if(data.status==200){
                 this.error = false;
@@ -54,6 +60,19 @@ export class LstPokemonSearchComponent implements OnInit {
                 this.stats = data.body.descripcion.stats;
                 this.loading = false;
                 this.checkPokemon = true;
+                let datevol = data.body.evoluciones[0].evolves_to;
+                if(datevol.length>0){
+                    let pokevol= datevol[0].species.name;
+                    this.evolutions.push({ name: pokevol})
+                    if(datevol[0].evolves_to.length>0){
+                        pokevol= datevol[0].evolves_to[0].species.name
+                        this.evolutions.push({ name: pokevol})
+                    }
+                }
+                //ssfor(let i=0;i<datevol.envol.length;i++){
+                    
+                //}
+
 
             }else{
                 console.log('error')
@@ -63,6 +82,9 @@ export class LstPokemonSearchComponent implements OnInit {
             console.log(err)
             if(err.status==404)
                 this.mensajeError = 'Debe introducir un pokemon o identificador de pokemon';
+            
+            if(err.status==0)
+            this.mensajeError = 'Intenta buscar de nuevo'
         });
     }
 

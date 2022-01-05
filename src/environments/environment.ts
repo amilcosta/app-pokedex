@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlPokedex:'http://localhost:3000/',
+  urlPokedex:'https://pokedexserver.herokuapp.com/',
 };
 
 /*
