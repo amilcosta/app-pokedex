@@ -1,0 +1,112 @@
+
+
+
+
+<div class="container-fluid">
+
+    <div class="card">
+        
+        <div class="botones-ucc mr-5 ">
+            <button class="btn btn-ucc-volver" (click)="Volver()"><span class="separador"><i class="fas fa-undo"></i></span> Volver</button>
+        </div>
+        <div class="card-body border">
+            <form [formGroup]="Form" class="" (ngSubmit)="cargarPokemonFiltro(Form.value)">
+            <div class="area-big">
+                <div class="box-all">
+                    <label  class="label-ucc" for="filterPoke">&nbsp;&nbsp;Nombre Pokemon o ID Pokemon</label>
+                    <input class="input-ucc" formControlName="filterPoke" type="text" name="filterPoke" id="filterPoke">                        
+                    <!--label  class="label-ucc" for="filterNombre">&nbsp;&nbsp;Nombre</label>
+                    <input class="input-ucc" formControlName="filterNombre" type="text" name="filterNombre" id="filterNombre"-->
+                    
+                </div>
+                <div class="box-all">
+                    
+                </div>
+                <div class="box-all">
+                    <div>
+                        <button type="submit" data-toggle="collapse" data-target="#collapseThree"  aria-controls="collapseThree" class="btn btn-ucc"><i class="fas fa-search"></i>&nbsp;&nbsp;Buscar</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="checkPokemon" id="collapseThree" class="collapse container-fluid" aria-labelledby="headingThree" data-parent="#accordion" style="display: block; margin-top: 1em;">
+    <div id="accordion">
+        <div class="card cada-dtp">
+            
+            <div class="card-header">
+                <span class="separador"><i class="fas fa-users incon-size"></i></span> Pokemon
+                <div class="filtro-ucc">
+                    
+                        <div class="contador-ucc separador">
+                            
+                        </div>    
+                        <i class="fas fa-filter collapsed" data-toggle="collapse" data-target="#collapseThree"  aria-controls="collapseThree"></i>                       
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div style="border-radius: 2px; border-color: blue; margin: 0 0; color: #505050;  width:'50%'; float: left;">
+                    <div *ngFor="let item of listadoPokemons" style="width: 100%;">
+                        <div style="width: 100%;"><img style="cursor: pointer;" (click)="PokeDetail()" src="{{item.foto}}"/></div>
+                        <div style="width: 100%;">
+                            <span style="width: 50%; font-size: 14px; font-weight: 500;">
+                                Tipo: 
+                            </span>
+                            <span *ngFor="let tipo of typesPoke">{{tipo.type.name}}</span>
+                        </div>
+                        <div style="width: 100%;  font-size: 14px; font-weight: 500;">
+                            <span style="width: 50%;">
+                                Peso: {{item.peso}}
+                            </span>
+                        </div>
+                        <div style="width: 100%;">
+                            <span style="width: 50%;  font-size: 14px; font-weight: 500;">
+                                Habilidades: 
+                            </span>
+                            <ul class="list-group">
+                                <li *ngFor="let habilidad of abilities" class="list-group-item" style="width: 50%; color: #505050">{{habilidad.ability.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="aditionalInfo" style="border-radius: 2px; border-color: blue; margin: 0 0; color: #505050;  width:'50%'; float: right;">
+                    <div *ngFor="let adicion of listadoPokemons" style="width: 100%;" >
+                        <div style="width: 100%;">
+                            <span style="width: 50%; font-size: 14px; font-weight: 500;">
+                                Evolucion: {{adicion.evoluciones.name}}
+                            </span>
+                        </div>
+                        <div style="width: 100%;">
+                            <div style="width: 100%;  font-size: 14px; font-weight: 500;">
+                                Descripion: 
+                            </div>
+                            <div style="width: 90%;  font-size: 14px; font-weight: 500; padding-left: 10px;">
+                                Color: {{adicion.descripcion.color}}
+                            </div>
+                            <div style="width: 90%;  font-size: 14px; font-weight: 500; padding-left: 10px;">
+                                Estadisticas:
+                                <ul class="list-group">
+                                    <li *ngFor="let itstat of stats" class="list-group-item" style="width: 50%; color: #505050">{{itstat.stat.name}}: {{itstat.base_stat}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div *ngIf="error" class="container-fluid" style="margin-top: 1em; color:red" >
+
+    <div class="card">
+    
+        Error: {{mensajeError}}
+    
+    </div>
+</div>
